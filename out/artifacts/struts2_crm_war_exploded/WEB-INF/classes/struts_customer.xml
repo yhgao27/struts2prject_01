@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="customer" namespace="/" extends="struts-default">
+        <!--定义拦截器-->
+        <interceptors>
+            <interceptor name="privilegeInterceptor" class="com.crm.web.action.PrivilegeInterceptor"/>
+        </interceptors>
+
+        <action name="customer_*" method="{1}" class="com.crm.web.action.CustomerAction">
+            <result name="findSuccess">/jsp/customer/list.jsp</result>
+            <result name="addViewSuccess">/jsp/customer/add.jsp</result>
+            <result name="saveSuccess" type="redirectAction">customer_find.action</result>
+            <result name="findError">/jsp/error.jsp</result>
+
+            <!--配置拦截器-->
+            <interceptor-ref name="privilegeInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--通配符的方式访问Action  - 最常用的方式-->
+    <package name="ad" namespace="/" extends="struts-default">
+        <action name="product_*" class="com.struts2.action.ProductAction" method="{1}">
+            <result name="success">/product.jsp</result>
+        </action>
+    </package>
+</struts>
